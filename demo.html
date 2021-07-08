@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    11111111111
+</body>
+<script>
+    // 构造函数A
+function A() {
+    this.name = 'A';
+};
+A.prototype.say = function() {
+    return this.name;
+};
+// 构造函数B
+function B() {
+    this.name = 'B';
+};
+// 构造函数C
+function C(width, height) {
+    this.name = 'C';
+    this.width = width;
+    this.height = height;
+    this.getArea = function() {
+        return this.width * this.height;
+    };
+};
+
+B.prototype = new A();
+C.prototype = new B();
+
+let c1 = new C(2, 6);
+console.log(c1);   // {name: "C", width: 2, height: 6, getArea: ƒ}
+console.log(c1.name);  // 'C'
+console.log(c1.getArea()); // 12
+console.log(c1.say());  // 'C'
+
+
+console.log(B.prototype.constructor);  // ƒ A() {}
+let b1 = new B();
+console.log(b1.constructor);   // ƒ A() {}
+
+
+var foo = {
+    value: 1,
+    bar: function() {
+        console.log(this.value)
+    }
+}
+foo.bar() // 1
+
+  wx.chooseImage({
+   count: 9, // 最多可以选择的图片张数，默认9
+   sizeType: ['original', 'compressed'], // original 原图，compressed 压缩图，默认二者都有
+   sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
+   success: function(res){
+   // success
+   console.log(res)
+   _this.setData({
+    src:res.tempFilePaths
+   })
+   },
+   fail: function() {
+   // fail
+   },
+   complete: function() {
+   // complete
+   }
+  })
+
+
+
+</script>
+</html>
