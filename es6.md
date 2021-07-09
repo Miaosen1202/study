@@ -25,8 +25,6 @@ Function，Object，__proto__，prototype 的区别与关联
     eg: function a() {}  函数a有prototype属性，var b = new a();(通过new关键字 生成对象b),
     b有__proto__属性。b.__proto__ === a.prototype
 
-
-
 判断变量类型 
     typeof 可以判断 string,number,boolean,undefined,object,function,symbol
     instanceof 运算符用来检测 constructor.prototype 是否存在于参数 object 的原型链上。
@@ -83,6 +81,7 @@ Action：
 
 防抖 节流
 // 防抖
+```
 function debounce(fn,time = 200) {
     let timerId = null;
     const helper = ()=>{
@@ -97,8 +96,9 @@ function debounce(fn,time = 200) {
     }
     return helper;
 }
-
+```
 // 节流
+```
 function throttle(fn,time) {
     let lock = true;
     const helper = ()=>{
@@ -113,6 +113,7 @@ function throttle(fn,time) {
     }
     return helper
 }
+```
 promise new  bind 深拷贝 JSON.Stringify()的缺点
 
 es6继承与es5的区别 
