@@ -1,4 +1,4 @@
-## javascript篇
+# javascript篇
 ## 一、数据类型
 ### JavaScript 有几种类型
 
