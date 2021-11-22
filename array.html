@@ -10,6 +10,7 @@
     <!-- <input type="password" name="title" /> -->
     <img class="viewImg" src="./1.jpg" alt="">
   <span></span>
+  <!-- <button message="后盾人">houdunren</button> -->
 </body>
 <script>
     // const array = [1, 2, 3, 4]
@@ -187,32 +188,159 @@ let set = new Set(arr);
 //使用forEach遍历
 set.forEach((item,key) => console.log(item,key,22));
 }
-// 10 
-// 将输入数据的整数下标转为向量
-// 特征提取
-// size
-// LDA
-// sigmoid
-// 层是神经网络最基本的计算单元
-// 特征提取
-// 极度下降
-// pivot_table();
-// 随机初始化
-// 线性判别分析
-// 优化网络权重参数
-// standardscaler
-// dropout层不能出现在卷积层之前
-// 特征图的形状
-// 从数据或环境反馈中自主学习到规则
-// ndarray
-// 显示特征之间的分布关系及走势
-// 长序列记忆问题
-// concatenate()
-// 神经元
-// 聚类结果中样本内聚度与差异度
 
+// {
+//   let hd = function(num) {
+//   return ++num;
+// };
+
+// console.log(hd instanceof Object); //true
+
+// let cms = hd;
+// console.log(cms(3));
+// }
+// {
+//   console.log(hd(3)); //4
+// function hd(num) {
+//   return ++num;
+// }
+// }
+
+{
+  function filterFun(item) {
+	return item <= 3
+}
+let hd = [1, 2, 3, 4, 5].filter(filterFun);
+console.log(hd); //[1,2,3]
+}
+
+{
+  let hd = [1,2, 8, 3, 5].filter(item => item <= 3);
+  console.log(hd);
+}
+
+// 函数返回值直接解构到变量
+{
+  function hd() {
+  return {
+    name: 'nihaoya',
+    url: 'houdunren.com'
+  };
+}
+let {name: n,url: u} = hd();
+console.log(n);
+}
+
+{
+  function user(name, { sex, age } = {}) {
+  console.log(name, sex, age); 
+}
+user("nihaoya", { sex: "男", age: 18 });
+}
+
+
+{
+let arr = [];
+for (let i = 0; i < 10; i++) {
+	arr.push((() => i));
+}
+console.log(arr[3]()); //3 如果使用var声明将是10
+}
+{
+  let btns = document.querySelectorAll("buttonnn");
+  btns.forEach(function(item) {
+    let bind = false;
+    item.addEventListener("click", function() {
+      if (!bind) {
+        let left = 1;
+        bind = setInterval(function() {
+          item.style.left = left++ + "px";
+        }, 1000);
+      }
+    });
+  });
+}
+{
+//   var foo = function(...args) {
+// // 要求实现函数体
+// }
+function foo(...args) {
+const target = (...arg1s) => foo(...[...args, ...arg1s])
+target.getValue = () => args.reduce((p, n) => p+ n, 0)
+return target
+}
+var f1 = foo(1,2,3);
+console.log(f1.getValue())
+f1.getValue(); // 6 输出是参数的和
+var f2 = foo(1)(2,3);
+f2.getValue(); // 6
+console.log(f2.getValue())
+var f3 = foo(1)(2)(3)(4);
+console.log(f3.getValue())
+f3.getValue(); // 10
+}
+
+{
+  Function.prototype.apply = function (context, arr) {
+    context = context ? Object(context) : window; 
+    context.fn = this;
+  
+    let result;
+    if (!arr) {
+        result = context.fn();
+    } else {
+        result = context.fn(...arr);
+    }
+      
+    delete context.fn
+    return result;
+}
+}
+
+// 防抖
+{
+  function debounce(fn, delay) {
+  let timer
+  return function (...args) {
+    if (timer) {
+      clearTimeout(timer)
+    }
+    timer = setTimeout(() => {
+      fn.apply(this, args)
+    }, delay)
+  }
+}
+
+// 测试
+const task = () => {
+  console.log('run task')
+}
+const debounceTask = debounce(task, 1000)
+window.addEventListener('scroll', debounceTask)
+}
+// 节流
+{
+  function throttle(fn, delay) {
+  let last = 0 // 上次触发时间
+  return (...args) => {
+    const now = Date.now()
+    if (now - last > delay) {
+      last = now
+      fn.apply(this, args)
+    }
+  }
+}
+// 测试
+const task = () => {
+  console.log('run task')
+}
+const throttleTask = throttle(task, 1000)
+window.addEventListener('scroll', throttleTask)
+}
 </script>
 <style>
-
+button {
+      position: absolute;
+    }
 </style>
 </html>
