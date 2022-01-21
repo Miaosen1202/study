@@ -171,9 +171,9 @@ Js如何实现继承？
 构造函数绑定：使用 call 或 apply 方法，将父对象的构造函数绑定在子对象上
 
 function Cat(name,color){
- 　Animal.apply(this, arguments);
- 　this.name = name;
- 　this.color = color;
+  Animal.apply(this, arguments);
+  this.name = name;
+  this.color = color;
 }
 实例继承：将子对象的 prototype 指向父对象的一个实例
 
@@ -182,21 +182,21 @@ Cat.prototype.constructor = Cat;
 拷贝继承：如果把父对象的所有属性和方法，拷贝进子对象
 
 function extend(Child, Parent) {
-　　　var p = Parent.prototype;
-　　　var c = Child.prototype;
-　　　for (var i in p) {
-　　　   c[i] = p[i];
-　　　}
-　　　c.uber = p;
+  var p = Parent.prototype;
+  var c = Child.prototype;
+  for (var i in p) {
+       c[i] = p[i];
+       }
+       c.uber = p;
 }
 原型继承：将子对象的 prototype 指向父对象的 prototype
 
 function extend(Child, Parent) {
     var F = function(){};
-    　F.prototype = Parent.prototype;
-    　Child.prototype = new F();
-    　Child.prototype.constructor = Child;
-    　Child.uber = Parent.prototype;
+      F.prototype = Parent.prototype;
+      Child.prototype = new F();
+      Child.prototype.constructor = Child;
+      Child.uber = Parent.prototype;
 }
 ES6 语法糖 extends继承
 
@@ -250,13 +250,13 @@ function foo() {
 }
 var a = 1
 foo()           //1       
-​
+
 const obj = {
   a: 2,
   foo: foo
 }
 obj.foo()      //2
-​
+
 const c = new foo()   //undefined
 对于直接调用 foo 来说，不管 foo 函数被放在了什么地方，this 一定是window
 对于 obj.foo() 来说，我们只需要记住，谁调用了函数，谁就是 this，所以在这个场景下 foo 函数中的 this 就是 obj 对象
@@ -384,7 +384,7 @@ js 从上到下解析方法，将其中的同步任务按照执行顺序排列�
 当程序调用外部的 API 时（比如 ajax、setTimeout 等），会将此类异步任务挂起，继续执行执行栈中的任务。等异步任务返回结果后，再按照顺序排列到事件队列中；
 主线程先将执行栈中的同步任务清空，然后检查事件队列中是否有任务，如果有，就将第一个事件对应的回调推到执行栈中执行，若在执行过程中遇到异步任务，则继续将这个异步任务排列到事件队列中。
 主线程每次将执行栈清空后，就去事件队列中检查是否有任务，如果有，就每次取出一个推到执行栈中执行，这个循环往复的过程被称为“Event Loop 事件循环”
-​
+
 图标
 八、浏览器页面渲染过程
 浏览器渲染页面的一般过程：
@@ -448,3 +448,10 @@ display:table+display:table-cell + vertical-align: middle;
         display:flex;
         justify-content: center;
         align-content: center;
+
+# 原型原型链
+所有对象都有'__proto__'属性，该属性对应该对象的原型.
+所有函数对象都有'prototype'属性，该属性的值会被赋值给该函数创建的对象的'__proto__'属性。
+所有原型对象都有'constructor'属性，还属性对应创建所有指向该原型的实例的构造函数。
+函数对象和原型对象通过'prototype'和'constructor'属性进行相互关联。
+因为每个对象和原型都有原型，对象的原型指向对象的父，而父的原型又指向父的父，这种原型层层连接起来的就构成了原型链。
